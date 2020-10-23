@@ -15,7 +15,7 @@ using namespace std;
 
 
 int main() { 
-	int sockfd, count;
+	int sockfd, count, valread;
 	clock_t start, end;
 	socklen_t len;
 	char buffer[1024];
