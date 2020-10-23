@@ -16,9 +16,10 @@
 
 
 int main() { 
-	int sockfd, n;
+	int sockfd, n, count;
 	socklen_t len;
 	char buffer[1024];
+	char msg[1024];
 	struct sockaddr_in servaddr, cliaddr; 
 	
 	// Create a UDP socket
@@ -35,23 +36,46 @@ int main() {
 	
 	// Bind the socket with the server address 
 	bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
-	
-	// random generator
-	srand(time(0));
-
-        while (1) {
+	count = 0;
+	//count is equal to number of clients messages recieved
+        while (count < 2) {
 		//Receive the client packet along with the address it is coming from
 		n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), 
 			MSG_WAITALL, ( struct sockaddr *) &cliaddr, &len);
 		buffer[n] = '\0';
-
-		//If a random number in the range of 0 to 10 is less than 4,
-		//we consider the packet lost and do not respond
-		if (rand()%10 < 4) continue;
-
-		//Otherwise, the server responds
-		sendto(sockfd, (const char *)buffer, strlen(buffer), 
+		//check contents of buffer to determine client x or y
+		if(buffer[7] == 'X') {
+			//first client recieved
+			if(count==0) {
+				message = "X:Alice recieved before Y:Bob";
+			}
+			// not first client recieved
+			else {
+				message = "Y:Bob recieved before X:Alice";
+			}
+			count++;
+		}
+		else if(buffer[7] == 'Y') {
+			//first client recieved
+			if(count==0) {
+				message = "Y:Bob recieved before X:Alice";
+			}
+			//not first client recieved
+			else {
+				message = "X:Alice recieved before Y:Bob";
+			}
+			count++;
+		}
+		//transfer contents of msg to message
+		for(int i = 0; i<message.length(); i++){
+			msg[i] = message[i];
+		}
+		msg[message.length()] = '\0';
+		//send message to clients containing which client came first
+		sendto(sockfd, (const char *)msg, strlen(buffer), 
 			MSG_CONFIRM, (const struct sockaddr *) &cliaddr, len);
+		
 	}
+	cout<< "Sent acknowledgment to both X and Y";
 	return 0; 
 }
