@@ -21,7 +21,7 @@ int main() {
 	char buffer[1024];
 	char msg[1024];
 	struct sockaddr_in servaddr, cliaddr; 
-	string message;
+	string temp;
 	
 	// Create a UDP socket
 	// Notice the use of SOCK_DGRAM for UDP packets
@@ -48,28 +48,28 @@ int main() {
 		if(buffer[7] == 'X') {
 			//first client recieved
 			if(count==0) {
-				message = "X:Alice recieved before Y:Bob";
+				temp = "X:Alice recieved before Y:Bob";
 			}
 			// not first client recieved
 			else {
-				message = "Y:Bob recieved before X:Alice";
+				temp = "Y:Bob recieved before X:Alice";
 			}
 			count++;
 		}
 		else if(buffer[7] == 'Y') {
 			//first client recieved
 			if(count==0) {
-				message = "Y:Bob recieved before X:Alice";
+				temp = "Y:Bob recieved before X:Alice";
 			}
 			//not first client recieved
 			else {
-				message = "X:Alice recieved before Y:Bob";
+				temp = "X:Alice recieved before Y:Bob";
 			}
 			count++;
 		}
 		//transfer contents of msg to message
-		for(int i = 0; i<message.length(); i++){
-			msg[i] = message[i];
+		for(int i = 0; i<temp.length(); i++){
+			msg[i] = temp[i];
 		}
 		msg[message.length()] = '\0';
 		//send message to clients containing which client came first
