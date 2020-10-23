@@ -45,7 +45,6 @@ int main() {
 		int n;
 	        n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
 		buffer[n] = '\0';
-		valread = read(sockfd, buffer, 1024);
 		
 		  cout << "Ping Number " << count << "Round Trip Time " << end << " valread" << endl;
 		count++;
