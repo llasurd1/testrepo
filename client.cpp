@@ -33,9 +33,7 @@ int main() {
 	servaddr.sin_addr.s_addr = INADDR_ANY; // localhost
 	servaddr.sin_port = htons(PORT); // port number
 	
-	if(setsockopt (sockfd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv)) < 0) {
-   		 perror("Error");
-	}
+
 	//Keep track of number of pings
         count = 0;
 	//send 10 pings in a loop
