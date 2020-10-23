@@ -44,10 +44,10 @@ int main() {
 		sendto(sockfd, (const char *) buffer, strlen(buffer), MSG_CONFIRM, (const struct sockaddr *) &servaddr, len);
 		int n;
 	        n = recvfrom(sockfd, (char *)buffer, sizeof(buffer), MSG_WAITALL, (struct sockaddr *) &servaddr, &len);
-		//buffer[n] = '\0';
+		buffer[n] = '\0';
 		valread = read(sockfd, buffer, 1024);
 		
-		  cout << "Ping Number " << count << "Round Trip Time " << end << " count" << endl;
+		  cout << "Ping Number " << count << "Round Trip Time " << end << " valread" << endl;
 		count++;
 	}
 	
