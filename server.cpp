@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
                        (socklen_t*)&addrlen))<0) 
     { 
         perror("accept"); 
-        exit(EXIT_FAILURE); 
+         
     } 
     valread = read( new_socket , buffer, 1024); 
     printf("%s\n",buffer ); 
