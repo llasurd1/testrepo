@@ -21,6 +21,7 @@ int main() {
 	char buffer[1024];
 	char msg[1024];
 	struct sockaddr_in servaddr, cliaddr; 
+	string message;
 	
 	// Create a UDP socket
 	// Notice the use of SOCK_DGRAM for UDP packets
