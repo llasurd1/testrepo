@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
     address.sin_family = AF_INET; 
     address.sin_addr.s_addr = INADDR_ANY; 
     address.sin_port = htons( PORT ); 
-    while(1) {  
+      
     // Forcefully attaching socket to the port 8080 
     if (bind(server_fd, (struct sockaddr *)&address,  
                                  sizeof(address))<0) 
@@ -40,6 +40,8 @@ int main(int argc, char const *argv[])
         perror("bind failed"); 
         exit(EXIT_FAILURE); 
     } 
+    int count = 0;
+    while(count<2) {
     if (listen(server_fd, 3) < 0) 
     { 
         perror("listen"); 
@@ -56,6 +58,7 @@ int main(int argc, char const *argv[])
     printf("%s\n",buffer ); 
     send(new_socket , hello , strlen(hello) , 0 ); 
     printf("Hello message sent\n"); 
+        count++;
     }
     return 0; 
 } 
