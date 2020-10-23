@@ -72,7 +72,7 @@ int main() {
 		for(int i = 0; i<temp.length(); i++){
 			msg[i] = temp[i];
 		}
-		msg[message.length()] = '\0';
+		msg[temp.length()] = '\0';
 		//send message to clients containing which client came first
 		sendto(sockfd, (const char *)msg, strlen(buffer), 
 			MSG_CONFIRM, (const struct sockaddr *) &cliaddr, len);
