@@ -42,12 +42,12 @@ int main() {
 	}
 	//Keep track of number of pings
         count = 0;
-	len = sizeof(servaddr);
+	
 	//send 10 pings in a loop
 	for(int i = 0; i<10; i++){
 		//Get current time
 	        start = time(0);
-
+		len = sizeof(servaddr);
 		//Send message to server
 		sendto(sockfd, (const char *) buffer, strlen(buffer), MSG_CONFIRM, (const struct sockaddr *) &servaddr, len);
 		//Recieve message form server
