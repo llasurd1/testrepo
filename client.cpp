@@ -14,7 +14,7 @@ using namespace std;
 #define PORT	 1027
 
 //using command line args to control which client
-int main(int args, char *argv[])) { 
+int main(int args, char *argv[]) { 
 	int sockfd;
 	socklen_t len;
 	char buffer[1024];
